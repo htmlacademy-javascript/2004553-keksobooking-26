@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Сергей Касымский](https://up.htmlacademy.ru/htmlcss/33/user/2004553).
-* Наставник: [Андрей Ефимов](https://up.htmlacademy.ru/htmlcss/33/user/367335).
+* Студент: [Сергей Касымский](https://up.htmlacademy.ru/javascript/26/user/2004553).
+* Наставник: [Андрей Ефимов](https://up.htmlacademy.ru/javascript/26/user/367335).
 
 ---
 
