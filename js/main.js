@@ -34,17 +34,43 @@ export const getRandomPositiveFloat = (min, max, digits = 1) => {
   return parseFloat(result.toFixed(digits));
 };
 
+// Константа хранит значения колличества элементов в массиве
+export const OFFERS_COUNT = 10;
 
-// Домашка
-
-
-const TypeOfHousing = [
+const HOUSING_TYPES = [
   'palace',
   'flat',
   'house',
   'bungalow',
   'hotel',
 ];
+
+const FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+];
+
+const CHECKIN_TIMES = [
+  '12:00',
+  '13:00',
+  '14:00',
+];
+
+const CHECKOUT_TIMES = [
+  '12:00',
+  '13:00',
+  '14:00',
+];
+
+const PHOTOS = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
+
 const PriceRange = {
   MIN: 1000,
   MAX: 5000,
@@ -60,28 +86,6 @@ const GuestRange = {
   MAX: 20,
 };
 
-const CHECKIN_TIMES = ['12:00','13:00','14:00'];
-
-const CHECKOUT_TIMES = ['12:00','13:00','14:00'];
-
-const descriptionRoom = 'Уютное просторное светлое помещение,на верхних этажах здания с панорамными окнами и видом на большой город.';
-
-const FEATURES = [
-  'wifi',
-  'dishwasher',
-  'parking',
-  'washer',
-  'elevator',
-];
-
-const getRandomPart = (arr) => {
-  const lastIndex = arr.length - 1;
-  const valueA =  getRandomPositiveInteger(0, lastIndex);
-  const valueB =  getRandomPositiveInteger(0, lastIndex);
-
-  return arr.slice(Math.min(valueA, valueB), Math.max(valueA, valueB));
-};
-
 const COORD_AMOUNT = 5;
 const LatRang = {
   MIN: 35.65,
@@ -93,14 +97,26 @@ const LngRang = {
   MAX: 139.8,
 };
 
-const PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+const DESCRIPTION_OF_ROOM = 'Уютное просторное светлое помещение,на верхних этажах здания с панорамными окнами и видом на большой город.';
 
+const TITLE_OF_OFFERS = 'Этот вариант вам точно подойдет!';
 
+// Функция генерация случайных элементов массива
+const getRandomPart = (arr) => {
+  const lastIndex = arr.length - 1;
+  const valueA =  getRandomPositiveInteger(0, lastIndex);
+  const valueB =  getRandomPositiveInteger(0, lastIndex);
+
+  return arr.slice(Math.min(valueA, valueB), Math.max(valueA, valueB));
+};
+
+// Функция генерация случайного элемента массива
+const getRandomItem = (items) => items[getRandomPositiveInteger(0, items.length - 1)];
+
+// Функция добавления нуля перед однозначными числами в ссылках на изображение
 const formatNumberWithLeadZero = (num) => `${num < 10 ? '0' : ''}${num}`;
 
+// Функция генерация объектов
 const getRandomOffer = (_item, i) =>  {
 
   const index = i + 1;
@@ -111,15 +127,15 @@ const getRandomOffer = (_item, i) =>  {
 
   return {
     offer: {
-      title: 'Этот вариант вам точно подойдет!',
+      title: TITLE_OF_OFFERS,
       address: `${location.lat}, ${location.lng}`,
       price: getRandomPositiveInteger(PriceRange.MIN,PriceRange.MAX),
-      type: TypeOfHousing[getRandomPositiveInteger(0,TypeOfHousing.length-1)],
+      type: getRandomItem(HOUSING_TYPES),
       rooms: getRandomPositiveInteger(RoomsRange.MIN,RoomsRange.MAX),
       guest: getRandomPositiveInteger(GuestRange.MIN,GuestRange.MAX),
-      checkin: CHECKIN_TIMES[getRandomPositiveInteger(0,CHECKIN_TIMES.length-1)],
-      checkout: CHECKOUT_TIMES[getRandomPositiveInteger(0,CHECKOUT_TIMES.length-1)],
-      description: descriptionRoom,
+      checkin: getRandomItem(CHECKIN_TIMES),
+      checkout: getRandomItem(CHECKOUT_TIMES),
+      description: DESCRIPTION_OF_ROOM,
       photos: getRandomPart(PHOTOS),
       features: getRandomPart(FEATURES),
     },
@@ -127,10 +143,11 @@ const getRandomOffer = (_item, i) =>  {
     author: {
       avatar: `img/avatars/user${formatNumberWithLeadZero(index)}.png`
     },
-    location
+    location,
   };
 };
 
-const OFFERS_COUNT = 10;
-export const offers = Array.from({length: OFFERS_COUNT}, getRandomOffer);
+// Функция генерирует массив
+export const getOffers = (length = 1) => Array.from({ length }, getRandomOffer);
+
 
