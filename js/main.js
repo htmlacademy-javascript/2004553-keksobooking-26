@@ -110,7 +110,7 @@ const getRandomPart = (arr) => {
   return arr.slice(Math.min(valueA, valueB), Math.max(valueA, valueB));
 };
 
-// Функция генерация случайного элемента массива
+// Функция генерирует случайный элемент из  массива
 const getRandomItem = (items) => items[getRandomPositiveInteger(0, items.length - 1)];
 
 // Функция добавления нуля перед однозначными числами в ссылках на изображение
