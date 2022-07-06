@@ -34,7 +34,9 @@ export const getRandomPositiveFloat = (min, max, digits = 1) => {
   return parseFloat(result.toFixed(digits));
 };
 
-// Генерация данных
+// Константа хранит значения колличества элементов в массиве
+export const OFFERS_COUNT = 10;
+
 const HOUSING_TYPES = [
   'palace',
   'flat',
@@ -97,7 +99,7 @@ const LngRang = {
 
 const DESCRIPTION_OF_ROOM = 'Уютное просторное светлое помещение,на верхних этажах здания с панорамными окнами и видом на большой город.';
 
-const TITLEOFOFFERS = 'Этот вариант вам точно подойдет!';
+const TITLE_OF_OFFERS = 'Этот вариант вам точно подойдет!';
 
 // Функция генерация случайных элементов массива
 const getRandomPart = (arr) => {
@@ -114,6 +116,7 @@ const getRandomItem = (items) => items[getRandomPositiveInteger(0, items.length 
 // Функция добавления нуля перед однозначными числами в ссылках на изображение
 const formatNumberWithLeadZero = (num) => `${num < 10 ? '0' : ''}${num}`;
 
+// Функция генерация объектов
 const getRandomOffer = (_item, i) =>  {
 
   const index = i + 1;
@@ -124,7 +127,7 @@ const getRandomOffer = (_item, i) =>  {
 
   return {
     offer: {
-      title: TITLEOFOFFERS,
+      title: TITLE_OF_OFFERS,
       address: `${location.lat}, ${location.lng}`,
       price: getRandomPositiveInteger(PriceRange.MIN,PriceRange.MAX),
       type: [getRandomItem(HOUSING_TYPES)],
@@ -144,7 +147,7 @@ const getRandomOffer = (_item, i) =>  {
   };
 };
 
-export const OFFERS_COUNT = 10;
+// Функция генерирует массив
 export const getOffers = (length = 1) => Array.from({ length }, getRandomOffer);
 
 
