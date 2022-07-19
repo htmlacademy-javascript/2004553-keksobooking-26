@@ -1,7 +1,19 @@
-// Времено заменил импорт на экспорт чтобы не было ошибки.
-import {getOffers} from './offer-data.js';
-import {OFFERS_COUNT} from './data.js';
+import { getOffers } from './offer-data.js';
+import { generateCard } from './offer-card-gen.js';
+import { toggleAdForm } from './ad-form.js';
+import { toggleMapFilters } from './map-filters.js';
 
-getOffers(OFFERS_COUNT);
+const WAIT_TIME = 1000;
+const OFFERS_COUNT = 1;
 
+toggleAdForm();
+toggleMapFilters();
 
+setTimeout(() => {
+  getOffers(OFFERS_COUNT).forEach((offer) => {
+    document.querySelector('#map-canvas').append(generateCard(offer));
+  });
+
+  toggleAdForm(true);
+  toggleMapFilters(true);
+}, WAIT_TIME);
