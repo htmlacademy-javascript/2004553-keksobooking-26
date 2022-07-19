@@ -2,9 +2,13 @@ import { createPopup } from './popup.js';
 
 const SERVER = 'https://26.javascript.pages.academy/keksobooking';
 
-const handleError = () => {
+const handleFetchError = () => {
   createPopup('ERROR_FETCH');
   return [];
+};
+
+const handlePostError = () => {
+  createPopup('ERROR_POST');
 };
 
 const getData = () => fetch(`${SERVER}/data`, {
@@ -18,9 +22,9 @@ const getData = () => fetch(`${SERVER}/data`, {
       return res.json();
     }
 
-    return handleError();
+    return handleFetchError();
   })
-  .catch(handleError);
+  .catch(handleFetchError);
 
 const postData = (body, handleSuccess) => fetch(SERVER, {
   method: 'POST',
@@ -32,6 +36,7 @@ const postData = (body, handleSuccess) => fetch(SERVER, {
     if (ok) {
       handleSuccess();
     }
-  });
+  })
+  .catch(handlePostError);
 
 export { getData, postData };
