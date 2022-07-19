@@ -37,7 +37,7 @@ const getRandomOffer = (_item, i) =>  {
       price: getRandomPositiveInteger(PriceRange.MIN, PriceRange.MAX),
       type: getRandomItem(Object.keys(housingTypes)),
       rooms: getRandomPositiveInteger(RoomsRange.MIN, RoomsRange.MAX),
-      guest: getRandomPositiveInteger(GuestRange.MIN, GuestRange.MAX),
+      guests: getRandomPositiveInteger(GuestRange.MIN, GuestRange.MAX),
       checkin: getRandomItem(CHECKIN_TIMES),
       checkout: getRandomItem(CHECKOUT_TIMES),
       description: DESCRIPTION_OF_ROOM,
