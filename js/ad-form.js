@@ -1,8 +1,8 @@
 import { toggleForm, getWordAfterNum } from './utils.js';
-import { HOUSING_TYPES, RoomToGuests, MAX_PRICE } from './data.js';
+import { housingTypes, RoomToGuests, MAX_PRICE } from './data.js';
 
 const PRICE_PRIORITY = 1000;
-const FILTERS_DISABLED_CLASS_NAME = 'ad-form--disabled';
+const DISABLED_CLASS_NAME = 'ad-form--disabled';
 const formElement = document.querySelector('.ad-form');
 const submitElement = formElement.querySelector('.ad-form__submit');
 // const resetElement = formElement.querySelector('.ad-form__reset');
@@ -15,8 +15,8 @@ const priceFieldElement = formElement.querySelector('[name="price"]');
 
 const initialType = typeFieldElement.value;
 
-export const toggleFormElement = (isActive) => {
-  toggleForm(isActive, formElement, FILTERS_DISABLED_CLASS_NAME);
+export const toggleAdForm = (isActive) => {
+  toggleForm(isActive, formElement, DISABLED_CLASS_NAME);
 };
 
 const pristine = new Pristine(formElement, {
@@ -38,7 +38,7 @@ roomsFieldElement.addEventListener('change', () => pristine.validate(capacityFie
 
 // Валидация тип жилья и цена за ночь
 const setPriceAttributes = (type) => {
-  const minPrice = HOUSING_TYPES[type].min;
+  const minPrice = housingTypes[type].min;
   priceFieldElement.min = minPrice;
   priceFieldElement.placeholder = minPrice;
 };

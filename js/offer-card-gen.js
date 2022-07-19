@@ -1,5 +1,5 @@
 import { getElementFiller, getWordAfterNum } from './utils.js';
-import {HOUSING_TYPES} from './data.js';
+import { housingTypes } from './data.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const photoTemplate = cardTemplate.querySelector('.popup__photo');
@@ -18,7 +18,7 @@ export const generateCard = ({offer, author}) => {
   fillElement('.popup__text--price', `${offer.price} ₽/ночь`);
 
   // Тип жилья
-  fillElement('.popup__type', HOUSING_TYPES [offer.type]);
+  fillElement('.popup__type', housingTypes[offer.type].title);
 
   // Количество гостей и комнат
   const rooms = `${offer.rooms} ${getWordAfterNum(offer.rooms, ['комната','комнаты','комнат'])}`;

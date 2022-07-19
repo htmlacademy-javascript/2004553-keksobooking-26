@@ -1,5 +1,5 @@
 import {
-  HOUSING_TYPES,
+  housingTypes,
   FEATURES,
   CHECKIN_TIMES,
   CHECKOUT_TIMES,
@@ -35,7 +35,7 @@ const getRandomOffer = (_item, i) =>  {
       title: TITLE_OF_OFFERS,
       address: `${location.lat}, ${location.lng}`,
       price: getRandomPositiveInteger(PriceRange.MIN, PriceRange.MAX),
-      type: getRandomItem(HOUSING_TYPES),
+      type: getRandomItem(Object.keys(housingTypes)),
       rooms: getRandomPositiveInteger(RoomsRange.MIN, RoomsRange.MAX),
       guest: getRandomPositiveInteger(GuestRange.MIN, GuestRange.MAX),
       checkin: getRandomItem(CHECKIN_TIMES),

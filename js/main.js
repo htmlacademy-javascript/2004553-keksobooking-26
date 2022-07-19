@@ -1,19 +1,19 @@
-import {getOffers} from './offer-data.js';
-import {generateCard} from './data.js';
-import { toggleFormElement } from './utils.js';
-import { toggleFiltersMap } from './map-filters.js';
+import { getOffers } from './offer-data.js';
+import { generateCard } from './offer-card-gen.js';
+import { toggleAdForm } from './ad-form.js';
+import { toggleMapFilters } from './map-filters.js';
 
 const WAIT_TIME = 1000;
 const OFFERS_COUNT = 1;
 
-toggleFormElement();
-toggleFiltersMap();
+toggleAdForm();
+toggleMapFilters();
 
 setTimeout(() => {
   getOffers(OFFERS_COUNT).forEach((offer) => {
     document.querySelector('#map-canvas').append(generateCard(offer));
   });
 
-  toggleFormElement(true);
-  toggleFiltersMap(true);
+  toggleAdForm(true);
+  toggleMapFilters(true);
 }, WAIT_TIME);

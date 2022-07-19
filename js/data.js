@@ -1,6 +1,6 @@
 export const OFFERS_COUNT = 10;
 export const MAX_PRICE = 100000;
-export const HOUSING_TYPES = {
+export const housingTypes = {
   palace: {
     title: 'Дворец',
     min: 10000,
