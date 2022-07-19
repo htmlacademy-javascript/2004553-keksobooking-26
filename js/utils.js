@@ -1,3 +1,5 @@
+const PLURAL_THRESHOLD = 5;
+
 // Получение случайного целого из диапазона
 export const getRandomPositiveInteger = (min, max) => {
   if (min < 0 || max < 0) {
@@ -15,8 +17,7 @@ export const getRandomPositiveInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-
-// Получение числа с плавающей запятой
+// Получение случайного числа с заданной точностью из диапапзона
 export const getRandomPositiveFloat = (min, max, digits = 1) => {
   if (min < 0 || max < 0) {
     return getRandomPositiveFloat(Math.abs(min), Math.abs(max), digits);
@@ -34,27 +35,40 @@ export const getRandomPositiveFloat = (min, max, digits = 1) => {
   return parseFloat(result.toFixed(digits));
 };
 
+// Получение случайного элемента массива
+export const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// Функция генерация случайных элементов массива
-export const getRandomPart = (arr) => {
+// Получение случайного фрагмента массива
+export const getRandomArrayPart = (arr) => {
   const lastIndex = arr.length - 1;
-  const valueA =  getRandomPositiveInteger(0, lastIndex);
-  const valueB =  getRandomPositiveInteger(0, lastIndex);
+  const a = getRandomPositiveInteger(0, lastIndex);
+  const b = getRandomPositiveInteger(0, lastIndex);
+  const lower = Math.min(a, b);
+  const upper = Math.max(a, b);
 
-  return arr.slice(Math.min(valueA, valueB), Math.max(valueA, valueB));
+  return arr.slice(lower, upper);
 };
 
+// Вывод числа с ведущим нулём
+export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : number;
 
-// Функция генерирует случайный элемент из массива
-export const getRandomItem = (items) => items[getRandomPositiveInteger(0, items.length - 1)];
+// Выбор словоформы по значению числа
+export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
+  const lastDigit = num % 10;
 
+  if (num % 100 - lastDigit === 10 || lastDigit >= PLURAL_THRESHOLD) {
+    return form3;
+  }
 
-// Функция добавления нуля перед однозначными числами в ссылках на изображение
-export const formatNumberWithLeadZero = (num) => `${num < 10 ? '0' : ''}${num}`;
+  if (lastDigit === 1) {
+    return form1;
+  }
 
+  return form2;
+};
 
-// Создает функцию генерации DOM-узла заполненного контентом.
-export const getElementFiller = (template) => (selector, data, createChildElement) => {
+// Создаёт функцию, генерирующую DOM-узел, заполненный контентом
+export const getElementFiller = (template) => (selector, data = '', createChildElement) => {
   const element = template.querySelector(selector);
   const content = data.toString();
 
@@ -74,29 +88,21 @@ export const getElementFiller = (template) => (selector, data, createChildElemen
   }
 };
 
-const PLURAL_THRESHOLD = 5;
+export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
 
-// Выбор словоформы по значению числа
-export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
-  const lastDigit = num % 10;
-
-  if (num % 100 - lastDigit === 10 || lastDigit >= PLURAL_THRESHOLD) {
-    return form3;
-  }
-
-  if (lastDigit === 1) {
-    return form1;
-  }
-
-  return form2;
-};
-
-// Функция активации и деактивации
-export const toggleForm = (active, formElement, disabledClassName) => {
-  const classMethod = active ? 'remove' : 'add';
+export const toggleForm = (activeFlag, formElement, disabledClassName) => {
+  const classMethod = activeFlag ? 'remove' : 'add';
   formElement.classList[classMethod](disabledClassName);
 
   formElement.querySelectorAll('fieldset').forEach((fieldset) => {
-    fieldset.disabled = !active;
+    fieldset.disabled = !activeFlag;
   });
+};
+
+export const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
 };

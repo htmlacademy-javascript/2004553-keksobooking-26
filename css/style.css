@@ -748,6 +748,14 @@ fieldset {
   background-position: 0 0;
 }
 
+.contacts__link--instagram {
+  background-position: 0 -35px;
+}
+
+.contacts__link--facebook {
+  background-position: 0 -70px;
+}
+
 .contacts__link--vk {
   background-position: 0 -105px;
 }
@@ -755,6 +763,16 @@ fieldset {
 .contacts__link--twitter:hover,
 .contacts__link--twitter:focus {
   background-position: 0 -140px;
+}
+
+.contacts__link--instagram:hover,
+.contacts__link--instagram:focus {
+  background-position: 0 -175px;
+}
+
+.contacts__link--facebook:hover,
+.contacts__link--facebook:focus {
+  background-position: 0 -210px;
 }
 
 .contacts__link--vk:hover,
@@ -1034,4 +1052,10 @@ fieldset {
 
 .hidden {
   display: none;
+}
+
+.pristine-error {
+  margin: 5px 0 10px;
+  font-size: 12px;
+  color: #ff5635;
 }
